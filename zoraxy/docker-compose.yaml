@@ -1,0 +1,39 @@
+services:
+  fail2ban:
+    image: 'lscr.io/linuxserver/fail2ban:latest'
+    container_name: fail2ban
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    network_mode: host
+    environment:
+      - TZ=US/DETROIT
+      - VERBOSITY=-vv
+    volumes:
+      - '/root/docker/fail2ban/fail2ban-config:/config:z'
+      - '/root/docker/fail2ban/f2b-run:/var/run/fail2ban:z'
+      - '/var/log:/var/log:ro'
+      - '/var/log/httpd:/remotelogs/apache2:ro'
+    restart: unless-stopped
+
+  fail2ban-ui:   # ✅ now correctly nested
+    image: 'swissmakers/fail2ban-ui:latest'
+    container_name: fail2ban-ui
+    privileged: true
+    networks:
+      - proxy-net
+    environment:
+      - PORT=3080
+      - BIND_ADDRESS=0.0.0.0
+    volumes:
+      - '/root/docker/fail2ban/config:/config:Z'
+      - '/var/log:/var/log:ro'
+      - '/var/log/httpd:/remotelogs/apache2:ro'
+      - '/root/docker/fail2ban/fail2ban-config/fail2ban:/etc/fail2ban:z'
+      - '/root/docker/fail2ban/f2b-run:/var/run/fail2ban:z'
+    restart: unless-stopped
+
+networks:
+  proxy-net:
+    external: true

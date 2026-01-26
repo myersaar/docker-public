@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: git@github.com:petulant-pickle/petulantpickle.com.git
+      dockerfile: Dockerfile
+      ssh: default  # forwards your SSH key for private repo access
+    image: petulantpickle.com
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
