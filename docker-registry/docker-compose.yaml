@@ -29,3 +29,24 @@ services:
         "max-file": "5"
     networks:
       - registry
+
+  registry-ui:
+    container_name: "registry_ui"
+    image: joxit/docker-registry-ui:2
+    # Only listen on Tailscale interface (not localhost)
+    ports:
+      - "100.81.148.52:80:80"
+    environment:
+      SINGLE_REGISTRY: "true"
+      REGISTRY_TITLE: "Docker Registry"
+      REGISTRY_URL: "http://registry:5000"
+      NGINX_PROXY_PASS_URL: "http://registry:5000"
+      REGISTRY_SECURED: "false"
+      DELETE_IMAGES: "true"
+      SHOW_CONTENT_DIGEST: "true"
+      CATALOG_ELEMENTS_LIMIT: "1000"
+    depends_on:
+      - registry
+    restart: always
+    networks:
+      - registry

@@ -4,10 +4,12 @@ Private Docker registry (HTTP, no TLS). Reachable from the host and over Tailsca
 
 ## Access
 
-| From              | Registry URL           |
-|-------------------|------------------------|
-| This host (local) | `localhost:5000`        |
-| Over Tailscale    | `100.81.148.52:5000`   |
+| From              | Registry API (push/pull) | Web UI        |
+|-------------------|---------------------------|---------------|
+| This host (local) | `localhost:5000`          | —             |
+| Over Tailscale    | `100.81.148.52:5000`      | `http://100.81.148.52` |
+
+The web UI (docker-registry-ui) is bound only to the Tailscale IP, so it is not reachable from localhost.
 
 ## Client setup (insecure registry)
 
