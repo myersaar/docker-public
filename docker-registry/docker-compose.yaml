@@ -7,8 +7,9 @@ services:
   registry:
     container_name: "registry_web"
     image: registry:2.6
+    # Bind to all interfaces so registry is reachable via localhost and Tailscale
     ports:
-      - 5000:5000
+      - "0.0.0.0:5000:5000"
     environment:
       REGISTRY_HTTP_ADDR: :5000
 #      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/docker.me.intern.crt
