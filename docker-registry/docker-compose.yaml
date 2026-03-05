@@ -35,7 +35,7 @@ services:
     image: joxit/docker-registry-ui:2
     # Only listen on Tailscale interface (not localhost)
     ports:
-      - "100.81.148.52:80:80"
+      - "100.81.148.52:5080:80"
     environment:
       SINGLE_REGISTRY: "true"
       REGISTRY_TITLE: "Docker Registry"
