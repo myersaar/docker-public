@@ -17,6 +17,12 @@ services:
       REGISTRY_STORAGE: filesystem
       REGISTRY_STORAGE_DELETE_ENABLED: 'true'
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+      # CORS: allow the registry UI (Tailscale) to call the registry API
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '[http://100.81.148.52:5080]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,OPTIONS,DELETE]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Credentials: '[true]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers: '[Docker-Content-Digest]'
     volumes:
       - /root/docker-public/registry/data:/var/lib/registry
       - /root/docker-public/registry/certs:/certs
@@ -39,7 +45,8 @@ services:
     environment:
       SINGLE_REGISTRY: "true"
       REGISTRY_TITLE: "Docker Registry"
-      REGISTRY_URL: "http://registry:5000"
+      # Use same-origin so browser API calls go through the UI proxy (avoids CORS)
+      REGISTRY_URL: "http://100.81.148.52:5080"
       NGINX_PROXY_PASS_URL: "http://registry:5000"
       REGISTRY_SECURED: "false"
       DELETE_IMAGES: "true"
