@@ -22,7 +22,7 @@ storage:
   delete:
     enabled: true
 http:
-  addr: :5000
+  addr: ":5000"
 EOF
 fi
 

@@ -11,7 +11,7 @@ services:
     ports:
       - "0.0.0.0:5000:5000"
     environment:
-      REGISTRY_HTTP_ADDR: :5000
+      REGISTRY_HTTP_ADDR: ":5000"
 #      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/docker.me.intern.crt
 #      REGISTRY_HTTP_TLS_KEY: /certs/docker.me.intern.key
       REGISTRY_STORAGE: filesystem
