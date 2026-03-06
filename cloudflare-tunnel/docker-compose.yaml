@@ -6,7 +6,7 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
-      - net
+      - proxy-net
     restart: unless-stopped
 
 networks:
