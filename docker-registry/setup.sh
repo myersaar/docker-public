@@ -3,7 +3,7 @@
 set -e
 
 # Base directory for registry data (must match paths in docker-compose.yaml)
-BASE_DIR="${BASE_DIR:-/root/docker-public/registry}"
+BASE_DIR="${BASE_DIR:-/root/docker-public/docker-registry}"
 
 echo "Creating Docker Registry directory structure..."
 
