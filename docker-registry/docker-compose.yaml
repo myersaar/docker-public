@@ -5,24 +5,25 @@ services:
   registry:
     container_name: registry
     image: registry:2
-    ports:
-      - "5000:5000"
+#    ports:
+#      - "5000:5000"
     environment:
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
       REGISTRY_STORAGE_DELETE_ENABLED: "true"
       REGISTRY_HTTP_ADDR: 0.0.0.0:5000
     volumes:
-      - ./data:/var/lib/registry
+      - /root/docker-public/docker-registry/data:/var/lib/registry
     restart: unless-stopped
 
   registry-ui:
     container_name: registry-ui
     image: joxit/docker-registry-ui:2
-    ports:
-      - "5080:80"
+#    ports:
+#      - "5080:80"
     environment:
       SINGLE_REGISTRY: "true"
       REGISTRY_TITLE: "Local Docker Registry"
+      REGISTRY_URL: https://registry.petulantpickle.com
       NGINX_PROXY_PASS_URL: http://registry:5000
       DELETE_IMAGES: "true"
       SHOW_CONTENT_DIGEST: "true"
