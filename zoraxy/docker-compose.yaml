@@ -27,7 +27,10 @@ services:
       FASTGEOIP: "true"
     networks:
       - zoraxy_default
+      - proxy-net
 
 networks:
   zoraxy_default:
     driver: bridge
+  proxy-net:
+    external: true
